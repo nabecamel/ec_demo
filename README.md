@@ -1,10 +1,12 @@
 ## 概要
+@campbel2525さんのものを利用させていただいております。
+https://github.com/campbel2525/python-sample
 
-fastapi, streamlit, scientist のサンプルです  
-それぞれ独立して動いていますが、1 つの docker で管理しています。
+
+fastapiのサンプルです  
 
 fastapi には jwt 認証を入れています。
-それぞれフォーマッタ窓が入っています。
+フォーマッタ窓が入っています。
 フォルダ構成は今考え中で一旦 laravel のフォルダ構成を参考にして作りました
 
 よく使うコマンドは Makefile にまとめてあります
@@ -45,18 +47,6 @@ make fastapi-run
 ブラウザで  
 http://localhost:8000/docs#/  
 にアクセスして swagger が表示されれば OK
-
-手順 5
-下記のコマンドにて dtreamlit サーバーを立ち上げる
-
-```
-make streamlit-run
-```
-
-手順 4
-ブラウザで
-http://localhost:8001/  
-にアクセスして streamlit がの画面が表示されれば OK
 
 ## push 時のルール
 
