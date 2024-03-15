@@ -18,17 +18,11 @@ build: ## 開発環境構築(ビルド)
 
 reinstall: ## リインストール
 	rm -rf apps/user-api/.venev
-#	rm -rf apps/streamlit/.venev
-#	rm -rf apps/scientist/.venev
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv install --dev
-#	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv install --dev
-#	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv install --dev
 
 
 init: ## 開発環境構築
 	cp apps/user-api/.env.example apps/user-api/.env
-#	cp apps/streamlit/.env.example apps/streamlit/.env
-#	cp apps/scientist/.env.example apps/scientist/.env
 	make build
 
 up: ## 開発環境up
@@ -45,7 +39,6 @@ destroy: ## 開発環境削除
 
 reset:
 	make sqlalchemy-reset
-#	make streamlit-reset
 
 reset:
 # dbのマイグレーションをリセットして良い場合のみ実行
@@ -57,14 +50,8 @@ reset:
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run alembic upgrade head
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run python app/console/commands/seeds.py
 
-fastapi-shell: ## shellに入る
+user-api-shell: ## shellに入る
 	docker compose -f $(pf) -p $(pn) exec -it fastapi bash
-
-#streamlit-shell: ## shellに入る
-#	docker compose -f $(pf) -p $(pn) exec -it streamlit bash
-
-#scientist-shell: ## shellに入る
-#	docker compose -f $(pf) -p $(pn) exec -it scientist bash
 
 db-shell: ## shellに入る
 	docker compose -f $(pf) -p $(pn) exec -it db bash
@@ -75,19 +62,9 @@ check: ## コードフォーマット
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run flake8 .
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run mypy .
 
-#	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run isort .
-#	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run black .
-#	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run mypy .
-#	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv run isort .
-#	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv run black .
-#	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv run flake8 .
-#	docker compose -f $(pf) -p $(pn) exec -it scientist pipenv run mypy .
-
-fastapi-run: ## サーバー起動
+user-api-run: ## サーバー起動
 	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run uvicorn main:app --host 0.0.0.0 --reload --port 8000
 
-#streamlit-run: ## サーバー起動
-#	docker compose -f $(pf) -p $(pn) exec -it streamlit pipenv run streamlit run main.py --server.port 8001 --server.headless true
 
 push: ## push
 # make format
@@ -100,10 +77,4 @@ push: ## push
 cc: ## キャッシュ クリア
 	rm -rf apps/user-api/log/fastapi.log
 	rm -rf apps/user-api/log/sqlalchemy.log
-#	rm -rf apps/streamlit/log/fastapi.log
-#	rm -rf apps/streamlit/log/sqlalchemy.log
-#	rm -rf apps/scientist/log/python.log
-#	rm -rf apps/scientist/log/sqlalchemy.log
 	rm -rf apps/user-api/.mypy_cache
-#	rm -rf apps/streamlit/.mypy_cache
-#	rm -rf apps/scientist/.mypy_cache

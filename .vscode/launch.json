@@ -13,19 +13,6 @@
           "remoteRoot": "/app"
         }
       ]
-    },
-    {
-      "name": "scientist",
-      "type": "python",
-      "request": "attach",
-      "port": 9002,
-      "host": "localhost",
-      "pathMappings": [
-        {
-          "localRoot": "${workspaceFolder}/apps/scientist",
-          "remoteRoot": "/app"
-        }
-      ]
     }
   ]
 }

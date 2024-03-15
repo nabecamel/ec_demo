@@ -40,46 +40,6 @@ services:
       - shared-network
       - default
 
-  # ---------------------------------
-  # streamlit
-  # ---------------------------------
-#  streamlit:
-#    restart: "no"
-#    tty: true
-#    build:
-#      context: ${STREAMLIT_CONTEXT}
-#      dockerfile: docker/local/python/Dockerfile
-#    depends_on:
-#      - db
-#    ports:
-#      - "127.0.0.1:9001:9001" # デバッグ用
-#      - "127.0.0.1:8001:8001" # webサーバー
-#    volumes:
-#      - ${STREAMLIT_CONTEXT}:/app
-#    networks:
-#      - shared-network
-#      - default
-
-  # ---------------------------------
-  # scientist
-  # ---------------------------------
-#  scientist:
-#    restart: "no"
-#    tty: true
-#    build:
-#      context: ${SCIENTIST_CONTEXT}
-#     dockerfile: docker/local/python/Dockerfile
-#    depends_on:
-#      - db
-#    ports:
-#      - "127.0.0.1:9002:9002" # デバッグ用
-#    volumes:
-#      - ${SCIENTIST_CONTEXT}:/app
-#      - ${DATABASE_CONTEXT}:/app/common/database
-#    networks:
-#      - shared-network
-#      - default
-
 volumes:
   db-data80:
 
