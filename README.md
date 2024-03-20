@@ -69,6 +69,7 @@ numpy をインストールする方法
 手順 1
 下記のコマンドでコンテナの中に入ります
 
+
 ```
 make shell
 ```
@@ -194,4 +195,7 @@ rm -rf .venv
 # export PYTHONPATH=$PYTHONPATH:./python
 pipenv install
 pipenv run python app/src/transformer.py
+
+作ったER図のリンク
+https://drive.google.com/file/d/1fJrrGleJeii278IrmqjubTv33otG3-Rt/view?usp=sharing
 ```
