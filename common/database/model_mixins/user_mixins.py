@@ -2,9 +2,8 @@ from datetime import datetime
 
 from pytz import timezone  # type: ignore
 from sqlalchemy import BigInteger, Column, DateTime, String
-from sqlalchemy.orm import declarative_mixin
-from sqlalchemy.orm import relationship
-from sqlalchemy.orm import declared_attr
+from sqlalchemy.orm import declarative_mixin, declared_attr, relationship
+
 from config.settings import TIME_ZONE
 
 

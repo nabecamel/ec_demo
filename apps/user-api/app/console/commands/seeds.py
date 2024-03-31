@@ -13,6 +13,7 @@ def seeds():
         return
 
     seeders.UserSeeder().handle()
+    seeders.ProductSeeder().handle()
 
 
 if __name__ == "__main__":
