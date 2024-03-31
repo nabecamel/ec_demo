@@ -3,7 +3,8 @@ from datetime import datetime
 from pytz import timezone  # type: ignore
 from sqlalchemy import BigInteger, Column, DateTime, String
 from sqlalchemy.orm import declarative_mixin
-
+from sqlalchemy.orm import relationship
+from sqlalchemy.orm import declared_attr
 from config.settings import TIME_ZONE
 
 
@@ -22,3 +23,7 @@ class UserMixin:
     updated_at = Column(
         DateTime, nullable=False, default=current_timestamp, onupdate=current_timestamp
     )
+
+    @declared_attr
+    def orders(cls):
+        return relationship("Order", backref="user")

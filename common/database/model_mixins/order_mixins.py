@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from pytz import timezone  # type: ignore
-from sqlalchemy import BigInteger, Column, DateTime, String, Integer
+from sqlalchemy import BigInteger, Column, DateTime, String, Integer, ForeginKey
 from sqlalchemy.orm import declarative_mixin
 
 from config.settings import TIME_ZONE
@@ -12,7 +12,9 @@ def current_timestamp():
 
 @declarative_mixin
 class OrderMixin:
+    id = Column(BigInteger, primary_key=True)
     code = Column(String(255), unique=True, nullable=False)
+    user_id = Column(BigInteger, ForeginKey("user.id"),nullable = False)
     post_code = Column(String(10), nullable=False)
     user_address1 = Column(String(255), nullable=False)
     user_address2 = Column(String(255), nullable=False)

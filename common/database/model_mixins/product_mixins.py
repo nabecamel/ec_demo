@@ -13,7 +13,7 @@ def current_timestamp():
 
 
 @declarative_mixin
-class productMixin:
+class ProductMixin:
     id = Column(BigInteger, primary_key=True)
     code = Column(String(255), nullable=False, unique=True, comment="商品コード")
     name = Column(String(255), comment="商品名") # name って nullable=Falseにしなくていいのか気になります
