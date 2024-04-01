@@ -26,4 +26,4 @@ class ProductMixin:
 
     @declared_attr
     def orders(cls):
-        return relationship("Order", backref="product")
+        return relationship("OrderDetail", backref="product")
