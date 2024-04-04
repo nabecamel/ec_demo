@@ -38,9 +38,7 @@ destroy: ## 開発環境削除
 	docker volume ls -qf name=$(pn) | xargs docker volume rm
 
 reset:
-	make sqlalchemy-reset
-
-reset:
+# make sqlalchemy-reset
 # dbのマイグレーションをリセットして良い場合のみ実行
 # マイグレーションをリセットしない場合は、コマンドを変更すること
 # 運用を始めたらコマンドを変更すること

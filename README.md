@@ -1,9 +1,9 @@
 ## 概要
-@campbel2525さんのものを利用させていただいております。
+
+@campbel2525 さんのものを利用させていただいております。
 https://github.com/campbel2525/python-sample
 
-
-fastapiのサンプルです  
+fastapi のサンプルです
 
 fastapi には jwt 認証を入れています。
 フォーマッタ窓が入っています。
@@ -18,7 +18,7 @@ fasapi
 想定エディタ: vscode or cursor
 デバッグ: debugpy
 ライブラリ管理: pipenv
-orm: sqlqlchemy
+orm: sqlalchemy
 mysql: 8.0
 フォーマッターなど: flake8, mypy, black, isort
 jwt: pyJwt
@@ -68,7 +68,6 @@ numpy をインストールする方法
 
 手順 1
 下記のコマンドでコンテナの中に入ります
-
 
 ```
 make shell

@@ -2,7 +2,7 @@ from datetime import datetime
 
 from pytz import timezone  # type: ignore
 from sqlalchemy import BigInteger, Column, DateTime, String
-from sqlalchemy.orm import declarative_mixin, declared_attr, relationship
+from sqlalchemy.orm import declarative_mixin
 
 from config.settings import TIME_ZONE
 
@@ -13,11 +13,12 @@ def current_timestamp():
 
 
 @declarative_mixin
-class UserMixin:
+class ProductMixin:
     id = Column(BigInteger, primary_key=True)
-    name = Column(String(255), nullable=False, comment="名前")
-    email = Column(String(255), nullable=False, unique=True, comment="メールアドレス")
-    password = Column(String(255), nullable=False, comment="パスワード")
+    code = Column(String(255), nullable=False, unique=True, comment="商品コード")
+    name = Column(String(255), nullable=False, comment="商品名")
+    unit_price = Column(BigInteger, nullable=False, comment="単価")
+    percent_tax = Column(String(255), nullable=False, comment="消費税率")
     created_at = Column(
         DateTime, nullable=False, default=current_timestamp, comment="作成日時"
     )
@@ -28,7 +29,3 @@ class UserMixin:
         onupdate=current_timestamp,
         comment="更新日時",
     )
-
-    @declared_attr
-    def orders(cls):
-        return relationship("Order", backref="user")
