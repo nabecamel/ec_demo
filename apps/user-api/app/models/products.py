@@ -4,4 +4,3 @@ from config.settings import Base
 
 class Product(Base, ProductMixin):
     __tablename__ = "products"
-    
