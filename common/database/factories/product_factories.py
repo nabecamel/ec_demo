@@ -1,9 +1,11 @@
+from uuid import uuid4
+
 import factory
 from factory.alchemy import SQLAlchemyModelFactory
 
 from app import models
 from config.settings import db
-from uuid import uuid4
+
 
 class ProductFactory(SQLAlchemyModelFactory):
     class Meta:
