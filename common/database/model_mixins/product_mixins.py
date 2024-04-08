@@ -29,3 +29,5 @@ class ProductMixin:
         onupdate=current_timestamp,
         comment="更新日時",
     )
+    
+    

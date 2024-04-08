@@ -13,6 +13,8 @@ def seeds():
         return
 
     seeders.UserSeeder().handle()
+    seeders.ProductSeeder().handle()
+    typer.echo("シードデータの作成が完了しました。")
 
 
 if __name__ == "__main__":
