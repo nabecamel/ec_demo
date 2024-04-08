@@ -19,7 +19,15 @@ class ProductMixin:
     name = Column(String(255), nullable=False, comment="商品名")
     unit_price = Column(BigInteger, nullable=False, comment="単価")
     percent_tax = Column(String(255), nullable=False, comment="消費税率")
-    created_at = Column(DateTime, nullable=False, default=current_timestamp)
-    updated_at = Column(
-        DateTime, nullable=False, default=current_timestamp, onupdate=current_timestamp
+    created_at = Column(
+        DateTime, nullable=False, default=current_timestamp, comment="作成日時"
     )
+    updated_at = Column(
+        DateTime,
+        nullable=False,
+        default=current_timestamp,
+        onupdate=current_timestamp,
+        comment="更新日時",
+    )
+    
+    
