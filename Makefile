@@ -10,6 +10,7 @@ cp-env: ## envのコピー
 
 init: ## 開発環境構築(ビルド)
 	make destroy
+	rm -rf apps/user-api/.venev
 	docker compose -f $(pf) -p $(pn) build --no-cache
 	docker compose -f $(pf) -p $(pn) down --volumes
 	docker compose -f $(pf) -p $(pn) up -d

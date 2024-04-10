@@ -1,9 +1,7 @@
 from typing import TYPE_CHECKING
 
-
 from sqlalchemy import BigInteger, Column, DateTime, String, text
 from sqlalchemy.orm import Mapped, declarative_mixin, declared_attr, relationship
-
 
 if TYPE_CHECKING:
     from app.models.orders import Order
