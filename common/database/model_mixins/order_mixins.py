@@ -1,15 +1,5 @@
-from datetime import datetime
-
-from pytz import timezone  # type: ignore
 from sqlalchemy import BigInteger, Column, DateTime, ForeignKey, Integer, String, text
 from sqlalchemy.orm import declarative_mixin
-
-from config.settings import TIME_ZONE
-
-
-def current_timestamp():
-    jst = timezone(TIME_ZONE)
-    return datetime.now(jst)
 
 
 @declarative_mixin
