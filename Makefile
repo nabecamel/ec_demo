@@ -46,6 +46,15 @@ migrate: ## マイグレート
 	docker compose -f $(pf) -p $(pn) exec -it user-api pipenv run alembic revision --autogenerate -m 'comment'
 	docker compose -f $(pf) -p $(pn) exec -it user-api pipenv run alembic upgrade head
 
+migration-reset: ## マイグレーションのリセット
+# 開発中のコマンドになる
+# 運用が始まったら使用しないこと
+	docker compose -f $(pf) -p $(pn) exec -it user-api pipenv run python app/console/commands/drop_all_tables.py
+	rm -rf common/migrations/versions/*
+	docker compose -f $(pf) -p $(pn) exec -it user-api pipenv run alembic revision --autogenerate -m 'comment'
+	docker compose -f $(pf) -p $(pn) exec -it user-api pipenv run alembic upgrade head
+	docker compose -f $(pf) -p $(pn) exec -it user-api pipenv run python app/console/commands/seeds.py
+
 user-api-shell: ## shellに入る
 	docker compose -f $(pf) -p $(pn) exec -it user-api bash
 
