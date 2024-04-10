@@ -1,9 +1,14 @@
 FROM python:3.10
 
+# 必要なものをインストール
 RUN apt-get update
 RUN apt-get -y install locales
+
+# 日本語設定
 RUN localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
 
+# デフォルトのディレクトリを設定
+# イメージにディレクトリがないので作成される
 WORKDIR /app
 
 # project配下に.vnvを作成する
@@ -16,7 +21,6 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
 # パスを通す
-# appディレクトリが作成される
 ENV PYTHONPATH "/app"
 
 # デバッグ用
