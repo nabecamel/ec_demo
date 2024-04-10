@@ -11,7 +11,7 @@ RUN localedef -f UTF-8 -i ja_JP ja_JP.UTF-8
 # イメージにディレクトリがないので作成される
 WORKDIR /app
 
-# project配下に.vnvを作成する
+# project配下に.venvを作成する
 ENV PIPENV_VENV_IN_PROJECT=1
 
 # log出力をリアルタイムにする
