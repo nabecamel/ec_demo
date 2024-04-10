@@ -13,12 +13,12 @@ build: ## 開発環境構築(ビルド)
 	./docker/wait-for-db.sh
 	docker compose -f $(pf) -p $(pn) exec -T db mysql -psecret < docker/setup.dev.sql
 	make reinstall
-	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run alembic upgrade head
+	docker compose -f $(pf) -p $(pn) exec -it user-api pipenv run alembic upgrade head
 	make reset
 
 reinstall: ## リインストール
 	rm -rf apps/user-api/.venev
-	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv install --dev
+	docker compose -f $(pf) -p $(pn) exec -it user-api pipenv install --dev
 
 
 init: ## 開発環境構築
@@ -47,19 +47,19 @@ migrate: ## マイグレート
 	docker compose -f $(pf) -p $(pn) exec -it user-api pipenv run alembic upgrade head
 
 user-api-shell: ## shellに入る
-	docker compose -f $(pf) -p $(pn) exec -it fastapi bash
+	docker compose -f $(pf) -p $(pn) exec -it user-api bash
 
 db-shell: ## shellに入る
 	docker compose -f $(pf) -p $(pn) exec -it db bash
 
 check: ## コードフォーマット
-	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run isort .
-	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run black .
-	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run flake8 .
-	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run mypy .
+	docker compose -f $(pf) -p $(pn) exec -it user-api pipenv run isort .
+	docker compose -f $(pf) -p $(pn) exec -it user-api pipenv run black .
+	docker compose -f $(pf) -p $(pn) exec -it user-api pipenv run flake8 .
+	docker compose -f $(pf) -p $(pn) exec -it user-api pipenv run mypy .
 
 user-api-run: ## サーバー起動
-	docker compose -f $(pf) -p $(pn) exec -it fastapi pipenv run uvicorn main:app --host 0.0.0.0 --reload --port 8000
+	docker compose -f $(pf) -p $(pn) exec -it user-api pipenv run uvicorn main:app --host 0.0.0.0 --reload --port 8000
 
 
 push: ## push
@@ -71,6 +71,6 @@ push: ## push
 	git push origin main
 
 cc: ## キャッシュ クリア
-	rm -rf apps/user-api/log/fastapi.log
+	rm -rf apps/user-api/log/user-api.log
 	rm -rf apps/user-api/log/sqlalchemy.log
 	rm -rf apps/user-api/.mypy_cache

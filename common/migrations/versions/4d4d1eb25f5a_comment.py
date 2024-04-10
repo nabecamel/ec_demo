@@ -1,17 +1,18 @@
 """comment
 
-Revision ID: 23c709ee5f25
-Revises: 
-Create Date: 2024-04-04 07:42:04.672980
+Revision ID: 4d4d1eb25f5a
+Revises:
+Create Date: 2024-04-10 03:38:28.857670
 
 """
+
 from typing import Sequence, Union
 
 import sqlalchemy as sa
 from alembic import op
 
 # revision identifiers, used by Alembic.
-revision: str = "23c709ee5f25"
+revision: str = "4d4d1eb25f5a"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -48,17 +49,29 @@ def upgrade() -> None:
         sa.Column("code", sa.String(length=255), nullable=False, comment="注文コード"),
         sa.Column("user_id", sa.BigInteger(), nullable=False, comment="ユーザーID"),
         sa.Column(
-            "post_code", sa.String(length=10), nullable=False, comment="ユーザー郵便番号"
+            "post_code",
+            sa.String(length=10),
+            nullable=False,
+            comment="ユーザー郵便番号",
         ),
         sa.Column(
-            "user_address1", sa.String(length=255), nullable=False, comment="ユーザー住所1"
+            "user_address1",
+            sa.String(length=255),
+            nullable=False,
+            comment="ユーザー住所1",
         ),
         sa.Column(
-            "user_address2", sa.String(length=255), nullable=False, comment="ユーザー住所2"
+            "user_address2",
+            sa.String(length=255),
+            nullable=False,
+            comment="ユーザー住所2",
         ),
         sa.Column("user_tel", sa.String(length=15), nullable=False, comment="ユーザー電話番号"),
         sa.Column(
-            "user_email", sa.String(length=255), nullable=False, comment="ユーザーメールアドレス"
+            "user_email",
+            sa.String(length=255),
+            nullable=False,
+            comment="ユーザーメールアドレス",
         ),
         sa.Column("user_name", sa.String(length=255), nullable=False, comment="ユーザー名"),
         sa.Column(
@@ -113,16 +126,20 @@ def upgrade() -> None:
     op.create_table(
         "order_details",
         sa.Column("id", sa.BigInteger(), nullable=False),
-        sa.Column("order_id", sa.BigInteger(), nullable=False),
-        sa.Column("product_id", sa.BigInteger(), nullable=False),
-        sa.Column("product_code", sa.String(length=255), nullable=False),
-        sa.Column("product_name", sa.String(length=255), nullable=False),
-        sa.Column("product_unit_price", sa.BigInteger(), nullable=False),
-        sa.Column("product_percent_tax", sa.String(length=255), nullable=False),
-        sa.Column("purchase_number", sa.BigInteger(), nullable=False),
-        sa.Column("price", sa.BigInteger(), nullable=False),
-        sa.Column("created_at", sa.DateTime(), nullable=False),
-        sa.Column("updated_at", sa.DateTime(), nullable=False),
+        sa.Column("order_id", sa.BigInteger(), nullable=False, comment="注文ID"),
+        sa.Column("product_id", sa.BigInteger(), nullable=False, comment="商品ID"),
+        sa.Column(
+            "product_code", sa.String(length=255), nullable=False, comment="商品コード"
+        ),
+        sa.Column("product_name", sa.String(length=255), nullable=False, comment="商品名"),
+        sa.Column("product_unit_price", sa.BigInteger(), nullable=False, comment="単価"),
+        sa.Column(
+            "product_percent_tax", sa.String(length=255), nullable=False, comment="税率"
+        ),
+        sa.Column("purchase_number", sa.BigInteger(), nullable=False, comment="購入数"),
+        sa.Column("price", sa.BigInteger(), nullable=False, comment="金額"),
+        sa.Column("created_at", sa.DateTime(), nullable=False, comment="作成日時"),
+        sa.Column("updated_at", sa.DateTime(), nullable=False, comment="更新日時"),
         sa.ForeignKeyConstraint(
             ["order_id"],
             ["orders.id"],

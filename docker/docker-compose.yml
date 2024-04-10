@@ -19,13 +19,13 @@ services:
       - default
 
   # ---------------------------------
-  # fastapi
+  # user-api
   # ---------------------------------
-  fastapi:
+  user-api:
     restart: "no"
     tty: true
     build:
-      context: ${FASTAPI_CONTEXT}
+      context: ${USER_API_CONTEXT}
       dockerfile: docker/local/python/Dockerfile
     depends_on:
       - db
@@ -33,7 +33,7 @@ services:
       - "127.0.0.1:9000:9000" # デバッグ用
       - "127.0.0.1:8000:8000" # webサーバー
     volumes:
-      - ${FASTAPI_CONTEXT}:/app
+      - ${USER_API_CONTEXT}:/app
       - ${DATABASE_CONTEXT}:/app/common/database
       - ${MIGRATION_CONTEXT}:/app/migrations # common/migrationsにマウントはできない (SQLAlchemyのmigrateが動かない)
     networks:

@@ -1,8 +1,9 @@
 from datetime import datetime
+from typing import TYPE_CHECKING
 
 from pytz import timezone  # type: ignore
 from sqlalchemy import BigInteger, Column, DateTime, String
-from sqlalchemy.orm import declarative_mixin, declared_attr, relationship
+from sqlalchemy.orm import Mapped, declarative_mixin, declared_attr, relationship
 
 from config.settings import TIME_ZONE
 
@@ -10,6 +11,10 @@ from config.settings import TIME_ZONE
 def current_timestamp():
     jst = timezone(TIME_ZONE)
     return datetime.now(jst)
+
+
+if TYPE_CHECKING:
+    from app.models.orders import Order
 
 
 @declarative_mixin
@@ -30,5 +35,5 @@ class UserMixin:
     )
 
     @declared_attr
-    def orders(cls):
+    def orders(cls) -> Mapped["Order"]:
         return relationship("Order", backref="user")
