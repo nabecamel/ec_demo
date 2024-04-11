@@ -37,8 +37,8 @@ RUN pip install --upgrade pip
 # pipenvのインストール
 RUN pip install --upgrade setuptools pipenv
 
-# プロジェクトのファイルをコピー
-COPY ./ /project/
+# # プロジェクトのファイルをコピー
+# COPY ./ /project/
 
-# ライブラリのインストール
-RUN pipenv install --dev
+# # ライブラリのインストール
+# RUN pipenv install --dev
