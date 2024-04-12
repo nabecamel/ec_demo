@@ -1,15 +1,5 @@
-from datetime import datetime
-
-from pytz import timezone  # type: ignore
-from sqlalchemy import BigInteger, Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy import BigInteger, Column, DateTime, ForeignKey, Integer, String, text
 from sqlalchemy.orm import declarative_mixin
-
-from config.settings import TIME_ZONE
-
-
-def current_timestamp():
-    jst = timezone(TIME_ZONE)
-    return datetime.now(jst)
 
 
 @declarative_mixin
@@ -36,13 +26,15 @@ class OrderMixin:
     total_price = Column(Integer, nullable=False, comment="合計金額")
     payment_dated_at = Column(DateTime, comment="支払い日時")
     created_at = Column(
-        DateTime, nullable=False, default=current_timestamp, comment="作成日時"
+        DateTime,
+        nullable=False,
+        server_default=text("CURRENT_TIMESTAMP"),
+        comment="作成日時",
     )
     updated_at = Column(
         DateTime,
         nullable=False,
-        default=current_timestamp,
-        onupdate=current_timestamp,
+        server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"),
         comment="更新日時",
     )
 
@@ -63,12 +55,14 @@ class OrderDetailMixin:
     purchase_number = Column(BigInteger, nullable=False, comment="購入数")
     price = Column(BigInteger, nullable=False, comment="金額")
     created_at = Column(
-        DateTime, nullable=False, default=current_timestamp, comment="作成日時"
+        DateTime,
+        nullable=False,
+        server_default=text("CURRENT_TIMESTAMP"),
+        comment="作成日時",
     )
     updated_at = Column(
         DateTime,
         nullable=False,
-        default=current_timestamp,
-        onupdate=current_timestamp,
+        server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"),
         comment="更新日時",
     )
