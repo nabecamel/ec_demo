@@ -28,7 +28,5 @@ class ProductSeeder:
     def handle(self):
         i = 0
         for uuid in ProductSeeder.DEFAULT_UUIDS:
-            factories.ProductFactory.create(
-                code=uuid, name=f"product{i}", unit_price=100 * 1, percent_tax=5
-            )
+            factories.ProductFactory.create(code=uuid)
             i += 1
